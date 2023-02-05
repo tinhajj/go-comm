@@ -2,36 +2,36 @@ package main
 
 import (
 	"fmt"
-	"go-comm/server"
 )
 
 func main() {
 	fmt.Println("start")
-	s := server.NewServer()
-	c1 := server.NewClient()
-	c2 := server.NewClient()
-	c1.Connect(s)
-	c2.Connect(s)
+	b := NewBroker()
+	c1 := NewClient()
+	c2 := NewClient()
+
+	b.ConnectTo(c1)
+	b.ConnectTo(c2)
 
 	go func() {
-		for message := range c1.In {
+		for message := range c1.Tube.Out {
 			fmt.Println("client 1 received:", message)
 		}
 	}()
 
 	go func() {
-		for message := range c2.In {
+		for message := range c2.Tube.Out {
 			fmt.Println("client 2 received:", message)
 		}
 	}()
 
-	c1.Send(3)
-	c1.Send(3)
-	c1.Send(3)
+	c1.Send()
+	c1.Send()
+	c1.Send()
 
-	c2.Send(3)
-	c2.Send(3)
-	c2.Send(3)
+	c2.Send()
+	c2.Send()
+	c2.Send()
 
 	fmt.Println("end")
 }
