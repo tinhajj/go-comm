@@ -6,7 +6,8 @@ import (
 
 func main() {
 	fmt.Println("start")
-	b := NewBroker()
+	r := NewRouter()
+	b := NewBroker(r)
 	c1 := NewClient()
 	c2 := NewClient()
 

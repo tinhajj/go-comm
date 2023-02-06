@@ -1,10 +1,11 @@
 package main
 
 type Broker struct {
+	Router      *Router
 	Connections []*Connection
 }
 
-func NewBroker() *Broker {
+func NewBroker(r *Router) *Broker {
 	return &Broker{
 		Connections: []*Connection{},
 	}
@@ -20,7 +21,7 @@ func (b *Broker) ConnectTo(c *Client) {
 
 	go func() {
 		for msg := range c.Tube.In {
-			c.Tube.Out <- msg * 2
+			c.Tube.Out <- b.Router.Handle(msg)
 		}
 	}()
 
