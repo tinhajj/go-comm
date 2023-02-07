@@ -7,6 +7,13 @@ import (
 func main() {
 	fmt.Println("start")
 	r := NewRouter()
+	r.AddRoute("restart", func(data []byte) Message {
+		return Message{
+			Name: "restartapproved",
+			Data: []byte{},
+		}
+	})
+
 	b := NewBroker(r)
 	c1 := NewClient()
 	c2 := NewClient()

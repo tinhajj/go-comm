@@ -9,5 +9,8 @@ func NewClient() *Client {
 }
 
 func (c *Client) Send() {
-	c.Tube.In <- 33
+	c.Tube.In <- Message{
+		Name: "restart",
+		Data: nil,
+	}
 }

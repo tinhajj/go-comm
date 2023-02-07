@@ -1,6 +1,7 @@
 package main
 
 type Broker struct {
+	In          chan Message
 	Router      *Router
 	Connections []*Connection
 }
@@ -8,6 +9,7 @@ type Broker struct {
 func NewBroker(r *Router) *Broker {
 	return &Broker{
 		Connections: []*Connection{},
+		Router:      r,
 	}
 }
 
@@ -26,4 +28,8 @@ func (b *Broker) ConnectTo(c *Client) {
 	}()
 
 	c.Tube = t
+}
+
+func (b *Broker) Add(m Message) int {
+	return 3
 }

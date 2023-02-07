@@ -1,13 +1,17 @@
 package main
 
 type Tube struct {
-	In  chan int
-	Out chan int
+	In  chan Message
+	Out chan Message
 }
 
 func NewTube() *Tube {
 	return &Tube{
-		In:  make(chan int),
-		Out: make(chan int),
+		In:  make(chan Message),
+		Out: make(chan Message),
 	}
+}
+
+func (t *Tube) Send(Message) int {
+	return 0
 }
