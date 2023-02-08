@@ -1,8 +1,9 @@
 package main
 
-type Handler func(data []byte) Message
+type Handler func(m Message) Message
 
 type Message struct {
+	ID   uint64
 	Name string
 	Data []byte
 }
@@ -21,8 +22,8 @@ func (r *Router) AddRoute(name string, handler Handler) {
 	r.Routes[name] = handler
 }
 
-func (r *Router) Handle(message Message) Message {
-	h, ok := r.Routes[message.Name]
+func (r *Router) Handle(msg Message) Message {
+	h, ok := r.Routes[msg.Name]
 	if !ok {
 		return Message{
 			Name: "nohandle",
@@ -30,5 +31,5 @@ func (r *Router) Handle(message Message) Message {
 		}
 	}
 
-	return h(message.Data)
+	return h(msg)
 }

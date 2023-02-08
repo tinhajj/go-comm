@@ -1,16 +1,21 @@
 package main
 
 type Client struct {
-	Tube *Tube
+	Broker *Broker
+	Out    chan Message
 }
 
 func NewClient() *Client {
-	return &Client{}
+	return &Client{
+		Broker: nil,
+		Out:    make(chan Message),
+	}
 }
 
 func (c *Client) Send() {
-	c.Tube.In <- Message{
+	c.Broker.Add(Message{
+		ID:   0,
 		Name: "restart",
 		Data: nil,
-	}
+	})
 }
