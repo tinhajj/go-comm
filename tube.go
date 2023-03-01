@@ -5,10 +5,10 @@ type Tube struct {
 	Out chan Message
 }
 
-func NewTube() *Tube {
+func NewTube(size int) *Tube {
 	return &Tube{
-		In:  make(chan Message),
-		Out: make(chan Message),
+		In:  make(chan Message, size),
+		Out: make(chan Message, size),
 	}
 }
 

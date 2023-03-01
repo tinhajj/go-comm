@@ -1,21 +1,15 @@
 package main
 
 type Client struct {
-	Broker *Broker
-	Out    chan Message
+	Connection *Connection
 }
 
 func NewClient() *Client {
 	return &Client{
-		Broker: nil,
-		Out:    make(chan Message),
+		Connection: nil,
 	}
 }
 
-func (c *Client) Send() {
-	c.Broker.Add(Message{
-		ID:   0,
-		Name: "restart",
-		Data: nil,
-	})
+func (c *Client) Send(m Message) {
+	c.Connection.Send(m)
 }
