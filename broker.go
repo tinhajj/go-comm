@@ -1,15 +1,12 @@
 package main
 
 type Broker struct {
-	Counter *Counter
-
 	Router      *Router
 	Connections []*Connection
 }
 
 func NewBroker(r *Router) *Broker {
 	return &Broker{
-		Counter:     new(Counter),
 		Router:      r,
 		Connections: []*Connection{},
 	}
