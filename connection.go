@@ -1,14 +1,12 @@
 package main
 
 type Connection struct {
-	Client *Client
-	Tube   *Tube
+	Tube *Tube
 }
 
-func NewConnection(c *Client) *Connection {
+func NewConnection() *Connection {
 	return &Connection{
-		Client: c,
-		Tube:   NewTube(100),
+		Tube: NewTube(100),
 	}
 }
 

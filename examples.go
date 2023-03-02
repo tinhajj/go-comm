@@ -16,11 +16,9 @@ func example1() {
 	})
 
 	b := NewBroker(r)
-	c1 := NewClient()
-	c2 := NewClient()
 
-	b.ConnectTo(c1)
-	b.ConnectTo(c2)
+	c1 := b.NewConnection()
+	c2 := b.NewConnection()
 
 	counter := 0
 	go func() {

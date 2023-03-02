@@ -12,14 +12,15 @@ func NewBroker(r *Router) *Broker {
 	}
 }
 
-func (b *Broker) ConnectTo(c *Client) {
-	connection := NewConnection(c)
-	b.Connections = append(b.Connections, connection)
-	c.Connection = connection
+func (b *Broker) NewConnection() *Connection {
+	conn := NewConnection()
+	b.Connections = append(b.Connections, conn)
 
 	go func() {
-		for msg := range connection.Tube.In {
-			connection.Tube.Out <- b.Router.Handle(msg)
+		for msg := range conn.Tube.In {
+			conn.Tube.Out <- b.Router.Handle(msg)
 		}
-	}()
+	()
+
+	return conn
 }
