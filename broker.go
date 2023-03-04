@@ -20,7 +20,7 @@ func (b *Broker) NewConnection() *Connection {
 		for msg := range conn.Tube.In {
 			conn.Tube.Out <- b.Router.Handle(msg)
 		}
-	()
+	}()
 
 	return conn
 }

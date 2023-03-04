@@ -22,14 +22,14 @@ func example1() {
 
 	counter := 0
 	go func() {
-		for message := range c1.Connection.Tube.Out {
+		for message := range c1.Tube.Out {
 			fmt.Println("client 1 received:", message)
 			counter++
 		}
 	}()
 
 	go func() {
-		for message := range c2.Connection.Tube.Out {
+		for message := range c2.Tube.Out {
 			fmt.Println("client 2 received:", message)
 		}
 	}()
@@ -54,16 +54,4 @@ func example1() {
 }
 
 func example2() {
-	/*
-		websocketserver
-
-		it receives a message
-		its from the frontend asking to do something and it wants a response
-		i send it to the client
-		i need to wait for the response
-		i send it to the frontend
-
-		client sends me a message
-		i send it to the frontend
-	*/
 }
