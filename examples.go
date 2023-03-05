@@ -22,15 +22,14 @@ func example1() {
 
 	counter := 0
 	go func() {
-		for message := range c1.Tube.Out {
-			fmt.Println("client 1 received:", message)
+		for range c1.Tube.Out {
+			//fmt.Println("client 1 received:", message)
 			counter++
 		}
 	}()
 
 	go func() {
-		for message := range c2.Tube.Out {
-			fmt.Println("client 2 received:", message)
+		for range c2.Tube.Out {
 		}
 	}()
 
@@ -48,10 +47,6 @@ func example1() {
 	fmt.Println("sleep main routine for 500ms")
 	time.Sleep(500 * time.Millisecond)
 
-	fmt.Println("counted", counter, "in 1000ms")
-
+	fmt.Println("received messages:", counter, "in 1000ms")
 	fmt.Println("end")
-}
-
-func example2() {
 }
